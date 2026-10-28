@@ -3,24 +3,82 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Hello World with Typescript</title>
+    <meta name="theme-color" content="#f2f4ef" />
+    <title>Cinema Seat Reservations</title>
   </head>
-  <body class="min-h-screen bg-slate-100 text-slate-900">
-    <main class="mx-auto flex min-h-screen max-w-2xl flex-col items-center justify-center gap-6 p-6">
-      <h1 class="text-4xl font-bold tracking-tight">Hello World with Typescript</h1>
-
-      <section class="w-full max-w-md overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
-        <img
-          src="/rigo-baby.jpg"
-          alt="Hello Rigo"
-          class="h-64 w-full bg-slate-50 object-contain p-2"
-        />
-        <div class="p-5">
-          <h2 class="text-xl font-semibold text-slate-900">Hello Rigo</h2>
-          <p id="app" class="mt-2 text-sm text-slate-600"></p>
+  <body>
+    <div id="app">
+      <header class="topbar">
+        <div class="brand">
+          <span class="brand-mark" aria-hidden="true">C</span>
+          <span>SCREEN / 01</span>
         </div>
-      </section>
-    </main>
-    <script type="module" src="/src/main.ts"></script>
+        <span class="session-label">STAFF SESSION</span>
+      </header>
+
+      <main class="page-shell">
+        <section class="page-heading" aria-labelledby="page-title">
+          <div>
+            <p class="eyebrow">CINEMA OPERATIONS</p>
+            <h1 id="page-title">Seat reservations</h1>
+          </div>
+          <div class="room-label"><span>ROOM 1</span><span>80 SEATS</span></div>
+        </section>
+
+        <section class="metrics" aria-label="Seat availability">
+          <div class="metric metric-available">
+            <span>AVAILABLE</span>
+            <p><strong id="available-count">80</strong><span>seats</span></p>
+          </div>
+          <div class="metric metric-occupied">
+            <span>OCCUPIED</span>
+            <p><strong id="occupied-count">0</strong><span>seats</span></p>
+          </div>
+          <div class="metric metric-capacity">
+            <span>CAPACITY</span>
+            <p><strong>80</strong><span>seats</span></p>
+          </div>
+        </section>
+
+        <section class="workspace" aria-label="Cinema seating">
+          <div class="map-panel">
+            <div class="map-heading">
+              <div>
+                <p class="eyebrow">LIVE SEAT MAP</p>
+                <h2>Choose a seat</h2>
+              </div>
+              <span class="row-caption">ROWS A-H</span>
+            </div>
+            <div class="screen" aria-label="Screen at the front of the room">SCREEN</div>
+            <div class="seat-map-scroll">
+              <div id="seat-grid" class="seat-grid" role="grid" aria-label="Rows and seats"></div>
+            </div>
+            <div class="legend" aria-label="Seat key">
+              <span><i class="legend-seat available-seat" aria-hidden="true"></i>Available</span>
+              <span><i class="legend-seat occupied-seat" aria-hidden="true"></i>Occupied</span>
+              <span><i class="legend-seat pair-seat" aria-hidden="true"></i>Suggested pair</span>
+            </div>
+          </div>
+
+          <aside class="reservation-panel" aria-labelledby="reservation-title">
+            <p class="eyebrow">BOOKING TOOLS</p>
+            <h2 id="reservation-title">Reservation</h2>
+            <p class="panel-copy">Select an available seat on the map to reserve it.</p>
+            <button id="find-pair" class="pair-button" type="button">
+              Find two seats together
+              <span aria-hidden="true">→</span>
+            </button>
+            <p id="status-message" class="status-message" role="status" aria-live="polite">
+              Ready for reservations.
+            </p>
+            <div class="reservation-note">
+              <span class="note-dot" aria-hidden="true"></span>
+              Reservations are held for this session only.
+            </div>
+          </aside>
+        </section>
+      </main>
+    </div>
+    <script type="module" src="/src/web.ts"></script>
   </body>
 </html>
