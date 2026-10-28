@@ -4,6 +4,7 @@ export const COLUMN_COUNT = 10;
 export type SeatMatrix = number[][];
 export type SeatPosition = [row: number, column: number];
 
+/** Creates an 8-by-10 matrix with every seat available. */
 export function createSeatingMatrix(): SeatMatrix {
   const seats: SeatMatrix = [];
 
@@ -18,6 +19,7 @@ export function createSeatingMatrix(): SeatMatrix {
   return seats;
 }
 
+/** Prints the seat matrix with row and column labels, using L and X for seat states. */
 export function displaySeatMap(seats: SeatMatrix): void {
   let columnLabels = "   ";
   for (let columnIndex = 0; columnIndex < COLUMN_COUNT; columnIndex += 1) {
@@ -35,6 +37,7 @@ export function displaySeatMap(seats: SeatMatrix): void {
   }
 }
 
+/** Validates a 1-based position and reserves the seat when it is available. */
 export function reserveSeat(seats: SeatMatrix, row: number, column: number): string {
   if (!Number.isInteger(row) || !Number.isInteger(column)) {
     return "Reservation failed: row and column must be whole numbers.";
@@ -52,6 +55,7 @@ export function reserveSeat(seats: SeatMatrix, row: number, column: number): str
   }
 }
 
+/** Returns the occupied and available seat totals for the whole theater. */
 export function getSeatCounts(seats: SeatMatrix): [occupied: number, available: number] {
   let occupied = 0;
   let available = 0;
@@ -69,6 +73,7 @@ export function getSeatCounts(seats: SeatMatrix): [occupied: number, available: 
   return [occupied, available];
 }
 
+/** Finds the first horizontal pair of available seats, or returns null when none exists. */
 export function findAdjacentAvailableSeats(seats: SeatMatrix): [SeatPosition, SeatPosition] | null {
   for (let rowIndex = 0; rowIndex < ROW_COUNT; rowIndex += 1) {
     for (let columnIndex = 0; columnIndex < COLUMN_COUNT - 1; columnIndex += 1) {

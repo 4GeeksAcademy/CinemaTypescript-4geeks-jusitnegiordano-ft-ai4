@@ -12,6 +12,7 @@ const seats = createSeatingMatrix();
 const terminal = createInterface({ input: stdin, output: stdout });
 
 try {
+  // Keep presenting staff actions until the user chooses to exit.
   let running = true;
 
   while (running) {

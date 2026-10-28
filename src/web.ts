@@ -7,6 +7,7 @@ import {
   type SeatPosition,
 } from "./seating";
 
+/** Returns a required page element or explains which element is missing. */
 function requireElement<T extends Element>(selector: string): T {
   const element = document.querySelector<T>(selector);
   if (!element) {
@@ -23,12 +24,14 @@ const findPairButton = requireElement<HTMLButtonElement>("#find-pair");
 const seats = createSeatingMatrix();
 let highlightedPair: [SeatPosition, SeatPosition] | null = null;
 
+/** Updates the visible occupied and available totals. */
 function updateCounts(): void {
   const [occupied, available] = getSeatCounts(seats);
   occupiedCount.textContent = String(occupied);
   availableCount.textContent = String(available);
 }
 
+/** Rebuilds the seat grid to reflect occupancy and any suggested pair. */
 function renderSeatMap(): void {
   seatGrid.replaceChildren();
 
@@ -68,6 +71,7 @@ function renderSeatMap(): void {
         `Row ${rowIndex + 1}, seat ${columnIndex + 1}, ${isOccupied ? "occupied" : "available"}`,
       );
 
+      // Reserve the selected seat, refresh the counts, and redraw the map.
       seatButton.addEventListener("click", () => {
         statusMessage.textContent = reserveSeat(seats, rowIndex + 1, columnIndex + 1);
         highlightedPair = null;
@@ -80,6 +84,7 @@ function renderSeatMap(): void {
   }
 }
 
+// Find and highlight the first available adjacent pair, or report that none exists.
 findPairButton.addEventListener("click", () => {
   highlightedPair = findAdjacentAvailableSeats(seats);
 
